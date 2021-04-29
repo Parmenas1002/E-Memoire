@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block self_css %}<link rel="stylesheet" href="{% static 'accounts/userLogin.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/fonts/fontawesome-all.min.css'%}">
+{% endblock %}
+
+{% block content %}
+
+{% if errorMessage != "" %}
+
+
+
+{% endif%}
+    <div class="container mt-5 justify-content-center align-content-center">
+        <div class="row justify-content-center align-content-center">
+            
+            <div class="col-md-6">
+                <div class="card shadow py-2 bg-white" id="connexionCard">
+                    
+                    <div class="card-body pt-3 pb-3">                                    
+                            <h3 class="loginTitle">Connexion</h3>
+                            <form method="post" id="studentForm" action="{% url 'loginUser' %}">
+                                {% csrf_token %}
+                                {{ form.username|as_crispy_field}}
+                                {{ form.password|as_crispy_field}}
+                                
+                                {% if errorMessage != "" %}
+                                    <p class="errorMessage">{{errorMessage}}</p>
+                                {% endif%}
+                                <div class="text-center">
+                                    <input type="submit" value="Se connecter " id="submit">
+                                </div>
+                                
+                            </form>  
+                            <div class="text-center mt-3"><a class="small" href="forgot-password.html">Mot de passe oublié?</a></div>
+                            <div class="text-center"><a class="small" href="{% url 'registerStudent' %}">Nouveau étudiant? Créer un compte</a></div>
+                            <div class="text-center"><a class="small" href="{% url 'registerTeacher' %}">Nouveau enseignant? Créer un compte</a></div>               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+{% endblock %}
+
+
+
+

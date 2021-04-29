@@ -1,0 +1,28 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Dependent Dropdown in Django</title>
+    </head>
+    <body>
+        <h2>Person Form</h2>
+        <h4>Bienvenue sur la page de création de compte là où les enseignants et les étudiants se joignent à nous !!</h4>
+
+        <h4>Créer un nouveau compte </h4>
+
+        <a href="{% url 'registerStudent'%}">Pour les étudiants</a>
+        <a href="{% url 'registerTeacher'%}">Pour les Enseignants</a>
+
+        <h4>Connectez vous à un compte existant</h4>
+
+        <a href="{% url 'loginUser'%}">Connectez-vous</a>
+
+    </body>
+</html>
+
+

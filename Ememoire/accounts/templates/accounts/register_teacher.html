@@ -1,0 +1,106 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block self_css %}<link rel="stylesheet" href="{% static 'accounts/registerTeacher.css' %}">{% endblock %}
+
+{% block content %}
+
+    
+    <div class="container mt-5 justify-content-center align-content-center">
+        <div class="row justify-content-center align-content-center">
+            
+            <div class="col-md-6">
+                <div class="card shadow py-2 bg-white" id="inscriptionCard">
+                    
+                    <div class="card-body pt-3 pb-3">                                    
+                            <h3 class="registerTitle mb-4">Inscription des Enseignants</h3>
+                            <form method="post" id="studentForm" action="{% url 'registerTeacher' %}">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">{{ form.lastName|as_crispy_field}}</div>
+                                    <div class="col-sm-6">{{ form.firstName|as_crispy_field}}</div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">{{ form.username|as_crispy_field}}</div>
+                                    <div class="col-sm-6">{{ form.email|as_crispy_field}}</div>
+                                </div>
+                                {{ form.teacherCode|as_crispy_field}}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">{{ form.password|as_crispy_field}}</div>
+                                    <div class="col-sm-6">{{ form.checkPassword|as_crispy_field}}</div>
+                                    
+                                </div>
+                                
+                                {% if errorMessage != "" %}
+                                    <p class="errorMessage"> {{errorMessage}}</p>
+                                {% endif%}
+                                <div class="text-center">
+                                    <input type="submit" value="S'inscrire" id="submitEntity">
+                                </div>
+                            </form>  
+                            
+                            <div class="text-center mt-3"> <span class="small">Vous avez déjà un compte ? </span> <a class="small" href="{% url 'loginUser' %}">Connectez vous</a></div>
+                                           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+
+
+        
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register-Teacher</title>
+        <link rel="stylesheet" href="{% static 'bootstrap-4.5.0-dist/css/bootstrap.css' %}">
+    </head>
+    <body>
+        <h4>Bienvenue sur la page d'inscription des Enseignants </h4>
+
+        <div class="container mt-5 ">
+            <div class="row justify-content-content align-content-center ">
+                <div class="col-md-12 text-center ">
+                    <form class="user" action="{% url 'registerTeacher' %}" method="post" >
+                            
+                        {% csrf_token %}  
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">{{ form.lastName|as_crispy_field}}</div>
+                            <div class="col-sm-6">{{ form.firstName|as_crispy_field}}</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">{{ form.username|as_crispy_field}}</div>
+                            <div class="col-sm-6">{{ form.email|as_crispy_field}}</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">{{ form.password|as_crispy_field}}</div>
+                            <div class="col-sm-6">{{ form.checkPassword|as_crispy_field}}</div>
+                            <div class="col-sm-6">{{ form.teacherCode|as_crispy_field}}</div>
+                        </div>
+                        {% if errorMessage != "" %}
+                            <p style="color: red;">{{errorMessage}}</p>
+                        {% endif%}
+                        
+                        <button class="btn btn-primary btn-block text-white btn-user" type="submit" id="mybutton">S'inscrire</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
+
+
+{% load static %}
+

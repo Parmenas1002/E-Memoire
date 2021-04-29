@@ -1,0 +1,40 @@
+﻿
+/*===================================================Header and Nav=======================================*/
+/* === Tous les mémoires*/
+
+#memoire_link
+{
+    text-decoration: none;
+}
+
+#memoire-card-body
+{
+    padding: 15px 15px;
+}
+
+#memoire-card-body .entity-acad
+{
+    font-weight: bold;
+    color: green;
+    margin-bottom: 10px;
+    
+}
+
+#memoire-card-body .topic
+{
+    font-weight: bold;
+    margin: 0;
+    font-size: 16px;
+    text-transform: uppercase;
+    
+}
+
+#memoire-card-body .supervisor
+{
+    color: #0F559B;
+    font-weight: bold;
+}
+#memoire-card-body .student-memoire
+{
+    color: #0F559B;
+}

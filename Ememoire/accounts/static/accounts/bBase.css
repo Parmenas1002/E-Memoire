@@ -1,0 +1,141 @@
+body
+{
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+.form-control:focus
+{
+  border: 2px solid rgba(0,0,0,0.1) !important;
+  box-shadow: none !important;
+}
+/*-----------------------------------------------------------------------------NavBar-----------------------------------------------------------------*/
+#nav_right, footer
+{
+    background-color: #0F559B;
+}
+
+#titre .title-element a
+{
+  text-decoration: none;
+  color: #0F559B;
+}
+
+@media screen and (max-width:660px)
+{
+  #titre
+  {
+    font-size: 15px;
+  }
+}
+@media screen and (max-width:340px)
+{
+  #titre
+  {
+    font-size: 12px;
+  }
+}
+/*========================== Memory card==================*/
+
+#card-memoire table
+{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#card-memoire th
+{
+    font-weight: bold;
+}
+
+@media screen and (max-width:660px)
+{
+  #card-memoire .hide_table
+{
+  display: none;
+}
+}
+
+#card-memoire td,#card-memoire th
+{
+    border: 2px solid #dddddd;
+    text-align: center;
+}
+
+#card-memoire td p
+{
+    margin-bottom: 0px;
+}
+#card-memoire td .statusTrue
+{
+    color: green;
+    font-weight: bold;
+}
+/*========================================Formulaire*/
+
+
+#formulaire .para-center
+{
+  color: #0F559B;
+  font-weight: bold;
+  text-align:center ; 
+  text-transform: uppercase;    
+}
+
+.form-control
+{
+  border: 2px solid lightgray !important;
+  
+}
+
+.asteriskField
+{
+  color:red;
+  margin-left: 5px;
+}
+
+#formulaire .errorMessage
+{
+  color: red;
+  text-align: center;
+}
+
+#formulaire #submit
+{
+ 
+ text-align: center;
+ border-radius: 5px;
+ font-weight: bold; 
+ font-size: 14px;
+ line-height: 1.2;
+ text-transform: uppercase;
+ padding: 10px;
+
+ -webkit-transition: all 0.4s;
+ -o-transition: all 0.4s;
+ -moz-transition: all 0.4s;
+ transition: all 0.4s;
+ background-color: white;
+ color: #0F559B;
+ border: 2px solid #0F559B;
+ box-shadow: 1px 1px 2px 0px white;
+
+  
+}
+
+#formulaire #submit:hover {
+    color: white;
+    background-color:#0F559B ;  
+    border: 2px solid #0F559B; 
+    box-shadow: 2px 2px 2px 0px black;   
+}
+
+/*=============================================================================Footer================================================================*/
+footer span
+{
+  color: white;
+  font-weight: bold;
+  width: 100%;
+}
+
+
+

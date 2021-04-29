@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title%} e-Memoire Accueil {% endblock %}</title>
+        {% block self_css %}{% endblock %}
+
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'uikit/css/uikit.css' %}">
+    </head>
+    <body>
+        {% include 'layouts/_nav.html' %}
+
+        
+        {% block content %}{% endblock %}   
+
+
+        {% include 'layouts/_footer.html' %}
+        <script src="{% static 'uikit/js/uikit.js' %}"></script>
+        <script src="{% static 'uikit/js/uikit-icons.js' %}"></script>
+        <script src="{% static 'bootstrap/js_q/jquery-3.5.0.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js_q/popper.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    </body>
+</html>

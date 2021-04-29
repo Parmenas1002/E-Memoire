@@ -1,0 +1,62 @@
+{% extends "accounts/dashboard_student.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container-fluid">
+      <div class="row mt-2 mb-2">
+          <div class="d-sm-flex justify-content-between align-items-center mb-4">
+              <h4 class="text-dark mb-0 pl-5" id="titre"> <span class="title-element"><a href="{% url 'home_site' %}">Accueil  </a>>>></span>  
+                  <span class="title-element"><a href="{% url 'dashboardStudent' %}">Tableau de Bord </a>>>></span> Dépôt de mémoire</h4>
+          </div>
+      </div>
+    </div>
+
+<div class="container-fluid mt-4 mb-5">
+    <div class="row justify-content-center align-content-center">                   
+        <div class="col-md-6">
+            <div class="card shadow py-2 bg-white" id="formulaire">
+                <div class="card-body">                                    
+                    <div><p class="para-center mb-4">Effectuer un nouveau dépôt</p></div>
+                    <form method="post" id="studentForm" enctype="multipart/form-data" data-faculty-url="{% url 'ajax_load_faculty' %}" data-entity-url="{% url 'ajax_load_entity' %}" data-options-url="{% url 'ajax_load_options' %}">
+                        {% csrf_token %}
+
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">{{ form.university|as_crispy_field}}</div>
+                            <div class="col-sm-6">{{ form.faculty|as_crispy_field}}</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">{{ form.entity|as_crispy_field}}</div>
+                            <div class="col-sm-6">{{ form.option|as_crispy_field}}</div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">{{ form.topic|as_crispy_field}}</div>
+                            <div class="col-sm-6 mb-3 mb-sm-0">{{ form.supervisor|as_crispy_field}}</div>
+                        </div> 
+                        <div class="form-group row">
+                          <div class="col-sm-6 mb-3 mb-sm-0">{{ form.patnerUsername|as_crispy_field}}</div>
+                          <div class="col-sm-6">{{ form.patnerPassword|as_crispy_field}}</div>
+                        </div>     
+                                            
+                        {{ form.document|as_crispy_field}} 
+                        
+                        {% if errorMessage != "" %}
+                            <p class="errorMessage">{{errorMessage}}</p>
+                        {% endif%}
+                      
+                        <div class="text-center">
+                          <input type="submit" value="Enregistrer" id="submit">
+                        </div>
+                    </form>     
+                            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static 'accounts/js/load_elements.js' %}"></script>
+{% endblock%}

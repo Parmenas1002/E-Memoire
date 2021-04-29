@@ -1,0 +1,95 @@
+{% extends "accounts/layouts/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+<!-----------------------------------------Informations Adaptées aux Etudiants grace au block------------------------------>
+{% block nav_right_element %}
+    <li class="nav-item" role="presentation"><a class="nav-link active" href="{% url 'dashboardTeacher' %}"><i class="fas fa-tachometer-alt"></i><span>Tableau de Bord</span></a></li>
+    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'profileTeacher' %}"><i class="fas fa-user"></i><span>Profile</span></a></li>
+
+{% endblock %}
+{% block self_css %}<link rel="stylesheet" href="{% static 'accounts/teachBoard.css' %}"> {% endblock %}
+{% block userName %} {{currentTeacher.last_name}} {{currentTeacher.first_name}}{% endblock %}
+{% block avatar%}<img class="border rounded-circle img-profile" src="{{currentTeacher.avatar.url}}"> {% endblock %}
+
+
+{% block content %}
+    
+    <div class="container-fluid">
+        <div class="row mt-2 mb-2">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                <h4 class="text-dark mb-0 pl-5" id="titre"> <span class="title-element"><a href="{% url 'home_site' %}">Accueil  </a>>>></span>  
+                    Tableau de Bord</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="card-upload">            
+        <div class="row justify-content-center align-content-center">
+            <div class="col-md-6 col-sm-7 col-10 col-xl-3 mb-4">
+                <div class="card shadow pt-2 pb-2" style="border-radius: 13px;">
+                    <div class="card-body">
+                        
+                        <div class="text-center font-weight-bold text-md mb-1 text-dark" ><span >Mes Projets de Soutenance</span></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>            
+    </div>
+    {% if exist_memoire == True %}
+        <div class="container-fluid mt-4">
+            <div class="row justify-content-center align-content-center">
+                <div class="col-lg-10 col-xl-10">
+                    <div class="card shadow mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="font-weight-bold m-0" id="titleCard">Tous les mémoires</h6>
+                            
+                        </div>
+                        <div class="card-body justify-content-center align-content-center" id="card-memoire">
+                            
+                                <table>
+                                    <tr>
+                                        <th>Thème du Mémoire</th>
+                                        <th class="hide_table">Etudiants</th>
+                                        <th class="hide_table">Filière</th>
+                                        <th class="hide_table">Superviseur</th>                                    
+                                        <th class="hide_table">Statut après la soutenance</th>
+                                    </tr>
+                                    {%for studentMemoire in memoires %}
+                                    <tr>
+                                        <td><a href="{% url 'viewTeacher' studentMemoire.id %}">{{studentMemoire.topic}}</a></td>
+                                        <td class="hide_table">
+                                            {{studentMemoire.get_students }}
+                                                
+                                        </td>
+                                        <td class="hide_table">{{studentMemoire.entity}}</td>
+                                        <td class="hide_table">{{studentMemoire.supervisor}}</td>
+                                        <td class="hide_table">
+                                            {% if studentMemoire.stateAfter == False %}
+                                                <p class="statusFalse">En attente</p>
+                                            {% else %}
+                                            <p class="statusTrue">Validé</p>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor%}
+                                </table>                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+    <div class="container mt-5">
+        <div class="row justify-content-center align-content-center">
+            <div class="col-md-6">
+                <p class="text-center" style="color: #0F559B;">Aucun mémoire n'a encore assigné sur votre profil. Si vous pensez que c'est une erreur veuillez vous rapprocher de notre équipe.</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+    
+    
+{% endblock %}

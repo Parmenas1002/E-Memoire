@@ -1,0 +1,135 @@
+{% extends "accounts/dashboard_teacher.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block self_css %}<link rel="stylesheet" href="{% static 'memoire/view.css' %}"> {% endblock %}
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row mt-2 mb-2">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                <h4 class="text-dark mb-0 pl-5" id="titre"> <span class="title-element"><a href="{% url 'home_site' %}">Accueil  </a>>>></span>  
+                    <span class="title-element"><a href="{% url 'dashboardTeacher' %}">Tableau de Bord </a></span></h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4">
+        <div class="row justify-content-between ">
+            <div class="col-md-7">
+                <div class="card shadow mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="font-weight-bold m-0 text-center" id="titleCard">Général</h6>                        
+                    </div>
+                    <div class="card-body justify-content-center align-content-center" >
+                        <p> <span class="title">Thème</span>  : {{memoire.topic}} </p>
+                        <p ><span class="title">Année Académique</span>  : {{memoire.academicYear}} </p>
+                        <p><span class="title">Superviseur</span>  : {{memoire.supervisor}}</p>
+                        <p><span class="title">Etudiants</span> : {{memoire.get_students }}</p>
+                        <p><span class="title">Moyenne</span> : 
+                            {% if memoire.middleClass != 0 %}
+                                {{memoire.middleClass }}
+                            {% else %}
+                                Non définie
+                            {% endif%}
+                            
+                        </p>
+                        <p><span class="title">Mention</span> : 
+                            {% if memoire.mention != None%}
+                                {{memoire.mention }}
+                            {% else %}
+                                Non définie
+                            {% endif%}
+                            
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="font-weight-bold m-0 text-center" id="titleCard">Formation</h6>                        
+                    </div>
+                    <div class="card-body justify-content-center align-content-center" >
+                        <p><span class="title">Université</span>  : {{memoire.university}} </p>
+                        <p><span class="title">Ecole</span> : {{memoire.faculty}} </p>
+                        <p><span class="title">Filière</span> : {{memoire.entity}}</p>
+                        {% if memoire.option != None %}
+                        <p><span class="title">Option</span> : {{memoire.option}}</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card shadow mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="font-weight-bold m-0 text-center" id="titleCard">Enseignants Attribués</h6>                        
+                    </div>
+                    <div class="card-body justify-content-center align-content-center" >
+                        {% for teacher in memoire.teachers.all %}
+                            <p class="text-center">{{teacher}}</p>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="font-weight-bold m-0 text-center" id="titleCard">Document</h6>                        
+                    </div>
+                    <div class="card-body justify-content-center align-content-center" >
+                        <div style="text-align: center;">
+                            <img src="{%static 'memoire/images/Capture.PNG' %}" alt="" width="60%" >
+                        </div>
+
+                        <div class="text-center mt-3" id="document">
+                            <p><a href="{{memoire.document.url}}" class="link">Lire le document</a></p>
+                            <p class="mt-1"><a href="{{memoire.document.url}}" class="link" download>Télécharger</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card shadow mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="font-weight-bold m-0 text-center" id="titleCard">Modifications</h6>                        
+                    </div>
+                    <div class="card-body justify-content-center align-content-center" id="formulaire">
+                        {% if memoire.stateAfter == False %}
+                            <form method="post" id="studentForm" action="{% url 'viewTeacher' memoire.id %}" >
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">{{ form.middleClass|as_crispy_field}}</div>
+                                    <div class="col-sm-6">{{ form.mention|as_crispy_field}}</div>
+                                </div>
+                                                    
+                                {{ form.stateAfter|as_crispy_field}} 
+                                {% if errorMessage != "" %}
+                                    <p class="errorMessage">{{errorMessage}}</p>
+                                {% endif%}
+                                <div class="text-center">
+                                    <input type="submit" value="Enregistrer" id="submit">
+                                </div>
+                            </form> 
+                        {% else %}
+                        <p class="text-center">Les modifications nécessaires à la validation du mémoire sont déja apportées.</p>
+                        {% endif %}    
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+{%  endblock %}

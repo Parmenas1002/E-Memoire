@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+{% load static%}
+{% block self_css %}<link rel="stylesheet" href="{% static 'memoire/indexe.css' %}"> {% endblock %}
+{% block content%}
+<h1>Bienvenue sur la page de présentation de tous nos mémoires</h1>
+
+
+
+<div class="container-fluid  pt-5" >
+
+    <div class="row justify-content-center align-content-center" id="view_regular">
+        <div class="col-md-8 col-sm-11 col-11">
+
+<!----------------------------------------------------Liste des Mémoires---------------------------------------------------------->    
+            {% for memoire in memoires %}
+                <a href="" id="memoire_link">
+                    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin mb-5 mt-3 " uk-grid uk-scrollspy="cls: uk-animation-slide-left; repeat: false" style="border-radius: 10px;">
+
+                        <div class="uk-card-media-left uk-cover-container" >
+                            <img src="{{ memoire.presentationImage.url }}" alt="" uk-cover >
+                            <canvas width="550" height="270"></canvas>
+                        </div>
+                        <div>
+                            <div class="uk-card-body" id="memoire-card-body">
+                                <p class="entity-acad">{{memoire.entity}} | {{memoire.academicYear}}</p>
+                                <h5 class="topic">{{memoire.topic}}</h5>
+                                <p>{{memoire.mention}}</p>
+                                <p>
+                                    <span>Réalisé par : </span>
+                                    
+                                    <span class="student-memoire">{{memoire.get_students }}</span>
+                                        
+                                        
+                                </p>
+                                
+                                
+                                <p></p>
+                                <p class="text-right">Encadré par : <span class="supervisor">{{memoire.supervisor}}</span> </p>
+                                
+                            </div>
+                        </div>
+                            
+                    </div>
+                </a>    
+            {% empty %}
+            <p>Nous n'avons pas encore ajouté de mémoire sur notre plateforme </p>
+            {% endfor %}    
+                
+        </div>
+{% endblock %}

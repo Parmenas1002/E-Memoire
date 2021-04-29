@@ -1,0 +1,183 @@
+{% extends "accounts/dashboard_teacher.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block self_css %}<link rel="stylesheet" href="{% static 'accounts/profil.css' %}"> {% endblock %}
+{% block nav_right_element %}
+    <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'dashboardTeacher' %}"><i class="fas fa-tachometer-alt"></i><span>Tableau de Bord</span></a></li>
+    <li class="nav-item" role="presentation"><a class="nav-link active" href="{% url 'profileTeacher' %}"><i class="fas fa-user"></i><span>Profile</span></a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row mt-2 mb-2">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                <h4 class="text-dark mb-0 pl-5" id="titre"> <span class="title-element"><a href="{% url 'home_site' %}">Accueil  </a>>>></span>  
+                 Profile</h4>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-4">
+        <div class="row justify-content-center align-content-center">
+            <div class="col-md-4 col-sm-6 col-xl-3 mb-4">
+                <div class="card shadow border-left-dark py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-dark font-weight-bold text-md mb-1 text-center"><span>Projets Total</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0 text-center">
+                                    <span>
+                                        {% if total <= 9 %}
+                                            0{{total}}
+                                        {% else %}
+                                            {{total}}
+                                        {%endif%}                                
+                                    </span>
+                                </div>
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xl-3 mb-4">
+                <div class="card shadow border-left-success py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-success font-weight-bold text-md mb-1 text-center"><span>Projets Validés</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0 text-center">
+                                    <span>
+                                        {% if valid <= 9 %}
+                                            0{{valid}}
+                                        {% else %}
+                                            {{valid}}
+                                        {%endif%}
+                                    
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xl-3 mb-4">
+                <div class="card shadow border-left-warning py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <div class="text-uppercase text-warning font-weight-bold text-md mb-1 text-center"><span>Projets en Attente</span></div>
+                                <div class="text-dark font-weight-bold h5 mb-0 text-center">
+                                    <span>
+                                        {% if no_valid <= 9 %}
+                                            0{{no_valid}}
+                                        {% else %}
+                                            {{no_valid}}
+                                        {%endif%}
+                                    
+                                    </span>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-4">
+
+        <div class="row justify-content-center align-content-center">                
+            
+            <div class="col-md-6 col-xl-3">
+                <div class="card shadow mb-3">                       
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">Avatar</p>
+                    </div>
+                    <div class="card-body text-center shadow pb-3 pt-2">
+                        <img class="rounded-circle mb-3" src="{{currentTeacher.avatar.url}}" width="160" height="160" id="user_avatar">
+                        <form action="{% url 'profileTeacher' %}" method="POST" enctype="multipart/form-data" id="formulaire">
+                            {% csrf_token %}
+                        
+                            <div>{{ avartarForm.avatar|as_crispy_field}}</div>
+                            <div class="text-center">
+                                <input type="submit" value="Enregistrer" id="submit" name="change_avatar">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>         
+            <div class="col-md-6 col-xl-3">
+                <div class="card shadow mb-3">
+
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">Informations Personnelles</p>
+                    </div>
+                    <div class="card-body">
+
+                        <p>Nom d'utilisateur : {{user.username}}</p>
+                        <p>Nom : {{currentTeacher.last_name}}</p>
+                        <p>Prénom : {{currentTeacher.first_name}}</p>
+                        <p>Addresse Mail : {{user.email}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3">
+                <div class="card shadow mb-3">
+
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 font-weight-bold">Modifications</p>
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'profileTeacher' %}" method="POST" id="formulaire">
+                            {% csrf_token %}
+                        
+                            <div>{{ changePassForm.old_password|as_crispy_field}}</div>
+                            <div>{{ changePassForm.new_password1|as_crispy_field}}</div>
+                            <div>{{ changePassForm.new_password2|as_crispy_field}}</div>
+                            
+                            <div class="text-center">
+                                <input type="submit" value="Enregistrer" id="submit" name="change_password">
+                            </div>
+
+                        </form>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        var loader = function(e){
+
+        let file = e.target.files;
+        let show = "<span>Fichier sélectionné : </span>"+ file[0].name;
+        let output = document.querySelector("label[for = 'id_avatar']");
+
+
+            let reader = new FileReader();
+            reader.addEventListener("load",function(e){
+
+            let data = e.target.result;
+            let image = document.getElementById('user_avatar')
+            image.src = data;
+            
+            
+            
+        });
+
+        reader.readAsDataURL(file[0])
+            
+
+
+
+        };
+
+        let fileinput = document.getElementById('id_avatar');
+        fileinput.addEventListener("change",loader)
+    </script>
+{% endblock %}

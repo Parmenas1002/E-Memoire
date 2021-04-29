@@ -1,0 +1,35 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/fonts/fontawesome-all.min.css'%}">
+</head>
+<body>
+    
+
+    
+<h1>e-Memoire : La référence Scientifique au Bénin</h1>
+    <h3>Impliquer vous dans la concrétisation de nos ambitions scientifiques</h3>
+
+ 
+    <h4>Vous etes enseignant ou étudiant ???</h4>
+
+
+    <h3>Découvrez nos différnts services pour les enseignants et les étudiants</h3>
+
+    <p><a href="{% url 'accounts_index'%}">Rejoignez l'équipe qui gagne</a></p>
+
+    <p><a href="{% url 'memoire_index'%}">Visitez la page des mémoires</a></p>
+    
+</body>
+</html>
+
+
+
+
